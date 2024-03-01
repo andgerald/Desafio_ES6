@@ -1,7 +1,7 @@
+//se crea la clase cliente
 class Cliente {
-  constructor(nombre, impuesto) {
+  constructor(nombre) {
     this._nombre = nombre;
-    this._impuesto = impuesto;
   }
 
   get nombre() {
@@ -10,10 +10,6 @@ class Cliente {
 
   set nombre(nuevonombre) {
     return (this._nombre = nuevonombre);
-  }
-
-  get impuesto() {
-    return this._impuesto;
   }
 
   calcularImpuesto(montoBrutoAnual, deducciones) {

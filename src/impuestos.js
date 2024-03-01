@@ -1,29 +1,31 @@
+//se crea la clase impuestos
 class Impuestos {
   constructor(montoBrutoAnual, deducciones) {
-    if (montoBrutoAnual >= 0 && deducciones >= 0) {
+    // se valida que el valor ingresado sea un numero y que sea mayor o igual a 0
+    if (
+      !isNaN(montoBrutoAnual) &&
+      !isNaN(deducciones) &&
+      montoBrutoAnual >= 0 &&
+      deducciones >= 0
+    ) {
       this._montoBrutoAnual = montoBrutoAnual;
-      this.deducciones = deducciones;
+      this._deducciones = deducciones;
     } else {
-      return console.log("El monto bruto anual debe ser un valor positivo.");
+      console.log(
+        "El monto bruto anual y deducciones deben ser valores numéricos positivos."
+      );
     }
+    //se valida si el monto de las deducciones es mayor que monto bruto arroge un  mensaje
     if (deducciones > montoBrutoAnual) {
-      return console.log("Queda exonerado de Impuestos Anuales");
+      console.log("Queda exonerado de Impuestos Anuales");
     }
   }
 
   get montoBrutoAnual() {
     return this._montoBrutoAnual;
   }
-  //   set montoBrutoAnual(nuevoMontoBrutoAnual) {
-  //     return (this._montoBrutoAnual = nuevoMontoBrutoAnual);
-  //   }
-
-  set montoBrutoAnual(monto) {
-    if (monto >= 0) {
-      this.montoBrutoAnual = monto;
-    } else {
-      console.log("El monto bruto anual debe ser un valor positivo.");
-    }
+  set montoBrutoAnual(nuevoMontoBrutoAnual) {
+    return (this._montoBrutoAnual = nuevoMontoBrutoAnual);
   }
 
   get deducciones() {
@@ -33,14 +35,6 @@ class Impuestos {
   set deducciones(nuevoDeducciones) {
     return (this._deducciones = nuevoDeducciones);
   }
-
-  //   set Deducciones(deduccion) {
-  //     if (deducciones >= 0) {
-  //       this.deducciones = deducciones;
-  //     } else {
-  //       console.log("Las deducciones deben ser un valor positivo.");
-  //     }
-  //   }
 }
 
 export default Impuestos;
