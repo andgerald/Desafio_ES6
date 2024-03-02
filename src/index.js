@@ -2,28 +2,40 @@
 import Cliente from "./clientes.js";
 import Impuestos from "./impuestos.js";
 
-//instanciamos impuestos
-const impuestosClienteExito = new Impuestos(20000, 5000);
+// Declaración de variables
+let impuestos;
+let cliente;
+let nombre = "Patricio";
 
-//instanciamos cliente
-const cliente = new Cliente("Juan");
+// caso uno : debe pasar las validaciones
+let montoBruto1 = 50000;
+let montoDeduccion1 = 222;
 
-//creamos una constante para almacenar el valor del calculo de impuesto
-const calculo = cliente.calcularImpuesto(
-  impuestosClienteExito._montoBrutoAnual,
-  impuestosClienteExito._deducciones
-);
+// caso dos : debe pasar las validaciones
+let montoBruto2 = -60;
+let montoDeduccion2 = 290;
 
-//creamos nueva instancia en donde el valor de la deduccion es  un valor negativo
-//nos deberia arrojar "El monto bruto anual y deducciones deben ser valores numéricos positivos.""
-new Impuestos(20000, -5000);
+//caso tres :
+let montoBruto3 = 5660;
+let montoDeduccion3 = -290;
 
-//creamos nueva instancia en donde el valor de la deduccion es mayor que el monto bruto
-//nos deberia arrojar "Queda exonerado de Impuestos Anuales""
-new Impuestos(20000, 500000);
+// caso cuatro:
+let montoBruto4 = 576;
+let montoDeduccion4 = 5290;
 
-//visualizamos al cliente con los impuestos
-console.log(cliente, impuestosClienteExito);
-
-//caso exitoso donde nos muestra el calculo de calcularImpuesto
-console.log(`Cliente: ${cliente._nombre} debe pagar $ ${calculo} de impuestos`);
+function validacion(montoBrutoAnual, deducciones) {
+  if (isNaN(montoBrutoAnual) || montoBrutoAnual < 0) {
+    console.log("El montoBrutoAnual debe ser un número positivo");
+  } else if (isNaN(deducciones) || deducciones < 0) {
+    console.log("El deducciones debe ser un número positivo");
+  } else {
+    impuestos = new Impuestos(montoBrutoAnual, deducciones);
+    cliente = new Cliente(nombre, impuestos);
+    cliente.nombre = "Claudia";
+    console.log(cliente.calcularImpuesto());
+  }
+}
+validacion(montoBruto1, montoDeduccion1);
+validacion(montoBruto2, montoDeduccion2);
+validacion(montoBruto3, montoDeduccion3);
+validacion(montoBruto4, montoDeduccion4);
