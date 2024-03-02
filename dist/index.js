@@ -5,25 +5,39 @@ var _impuestos = _interopRequireDefault(require("./impuestos.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 // importacion de cliente e impuestos
 
-//instanciamos impuestos
-var impuestosClienteExito = new _impuestos["default"](20000, 5000);
+// Declaración de variables
+var impuestos;
+var cliente;
+var nombre = "Patricio";
 
-//instanciamos cliente
-var cliente = new _clientes["default"]("Juan");
+// caso uno : debe pasar las validaciones
+var montoBruto1 = 50000;
+var montoDeduccion1 = 222;
 
-//creamos una constante para almacenar el valor del calculo de impuesto
-var calculo = cliente.calcularImpuesto(impuestosClienteExito._montoBrutoAnual, impuestosClienteExito._deducciones);
+// caso dos : debe pasar las validaciones
+var montoBruto2 = -60;
+var montoDeduccion2 = 290;
 
-//creamos nueva instancia en donde el valor de la deduccion es  un valor negativo
-//nos deberia arrojar "El monto bruto anual y deducciones deben ser valores numéricos positivos.""
-new _impuestos["default"](20000, -5000);
+//caso tres :
+var montoBruto3 = 5660;
+var montoDeduccion3 = -290;
 
-//creamos nueva instancia en donde el valor de la deduccion es mayor que el monto bruto
-//nos deberia arrojar "Queda exonerado de Impuestos Anuales""
-new _impuestos["default"](20000, 500000);
-
-//visualizamos al cliente con los impuestos
-console.log(cliente, impuestosClienteExito);
-
-//caso exitoso donde nos muestra el calculo de calcularImpuesto
-console.log("Cliente: ".concat(cliente._nombre, " debe pagar $ ").concat(calculo, " de impuestos"));
+// caso cuatro:
+var montoBruto4 = 576;
+var montoDeduccion4 = 5290;
+function validacion(montoBrutoAnual, deducciones) {
+  if (isNaN(montoBrutoAnual) || montoBrutoAnual < 0) {
+    console.log("El montoBrutoAnual debe ser un número positivo");
+  } else if (isNaN(deducciones) || deducciones < 0) {
+    console.log("El deducciones debe ser un número positivo");
+  } else {
+    impuestos = new _impuestos["default"](montoBrutoAnual, deducciones);
+    cliente = new _clientes["default"](nombre, impuestos);
+    cliente.nombre = "Claudia";
+    console.log(cliente.calcularImpuesto());
+  }
+}
+validacion(montoBruto1, montoDeduccion1);
+validacion(montoBruto2, montoDeduccion2);
+validacion(montoBruto3, montoDeduccion3);
+validacion(montoBruto4, montoDeduccion4);

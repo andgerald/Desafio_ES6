@@ -9,9 +9,14 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 //se crea la clase cliente
 var Cliente = /*#__PURE__*/function () {
-  function Cliente(nombre) {
+  function Cliente(nombre, impuestos) {
     _classCallCheck(this, Cliente);
-    this._nombre = nombre;
+    this._nombre = function () {
+      return nombre;
+    };
+    this._impuestos = function () {
+      return impuestos;
+    };
   }
   _createClass(Cliente, [{
     key: "nombre",
@@ -19,12 +24,18 @@ var Cliente = /*#__PURE__*/function () {
       return this._nombre;
     },
     set: function set(nuevonombre) {
-      return this._nombre = nuevonombre;
+      return this._nombre = function () {
+        return nuevonombre;
+      };
     }
   }, {
     key: "calcularImpuesto",
-    value: function calcularImpuesto(montoBrutoAnual, deducciones) {
-      return (montoBrutoAnual - deducciones) * 1.21;
+    value: function calcularImpuesto() {
+      //se valida si el monto de las deducciones es mayor que monto bruto arroge un  mensaje
+      if (this._impuestos()._deducciones > this._impuestos()._montoBrutoAnual) {
+        return "Queda exonerado de Impuestos Anuales";
+      }
+      return "El cliente ".concat(this.nombre(), " debe pagar un total de $").concat((this._impuestos()._montoBrutoAnual - this._impuestos()._deducciones) * 0.21);
     }
   }]);
   return Cliente;
